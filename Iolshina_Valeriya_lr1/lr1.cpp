@@ -12,90 +12,72 @@ void Error(short k);
 
 bool isNumber(ifstream &infile, char s)
 {
-	bool b;
-	if(infile >> s)
-	{
-		cout << s;
-		b = isInt(infile, s);
-		if(b)
-		{
-			if(s == '.')
-			{
-				if(infile >> s)
-				{
-					cout << s;
-					int i=0;
-					b = isUnsInt(infile, s, i);
-					if(b)
-					{
-						if (s == 'E' || s == 'e')
-						{
-							if(infile >> s)
-							{
-								cout << s;
-								b = isInt(infile, s);
-								if(b)
-									return true;
-								else
-                                                                {
-                                                                        Error(3);
-                                                                        return false; 
-                                                                }
-
-							}
-							else
-								return false;
-						}
-						else
-							return true;
-					}
-					else
-					{
-						Error(6);
-						return false;
-					}
-				}
-				else
-				{
-					Error(4);
-					return false;
-				}
-			}
-			else if (s == 'E' || s == 'e')
-			{
-				if(infile >> s)
-				{
-                                	cout << s;
-                                	b = isInt(infile, s);
-                                	if(b)
-                                                return true;
-                                        else
-                                        {
-						Error(3);
-						return false;
-					}
-                                }
-				else
-					return false;
-			}
-			else
-			{
-				Error(5);
-				return false;
-			}
-		}
-		else
-		{
-			Error(3);
-			return false;
-		}
-	}
-	else
-	{
-		Error(2);
-		return false;
-	}
+        bool b;
+        if(!(infile >> s))
+        {
+                Error(2); 
+                return false;
+        }
+        cout << s;
+        b = isInt(infile, s);
+        if(!b)
+        {
+                Error(3); 
+                return false;
+        }
+        if(s == '.')
+        {
+                if(!(infile >> s))
+                {
+                        Error(4); 
+                        return false;
+                }
+                cout << s;
+                int i=0;
+                b = isUnsInt(infile, s, i);
+                if(!b)
+                {
+                        Error(6); 
+                        return false;
+                }
+                if (s == 'E' || s == 'e')
+                {
+                        if(!(infile >> s))
+                                return false;
+                        cout << s;
+                        b = isInt(infile, s);
+                        if(b)
+                                return true;
+                        else
+                        {
+                                Error(3);
+                                return false; 
+                        }
+                }
+                else
+                        return true;
+        }
+        else if (s == 'E' || s == 'e')
+        {
+                if(!(infile >> s))
+                        return false;
+                cout << s;
+                b = isInt(infile, s);
+                if(b)
+                        return true;
+                else
+                {
+                        Error(3);
+                        return false;
+                }
+        }
+        else
+        {
+                Error(5);
+                return false;
+        }
 }
+
 
 
 bool isInt(ifstream &infile, char &ref)
