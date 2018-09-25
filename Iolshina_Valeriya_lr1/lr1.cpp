@@ -44,7 +44,7 @@ bool isNumber(ifstream &infile, char s)
 
 							}
 							else
-								return true;
+								return false;
 						}
 						else
 							return true;
@@ -187,7 +187,6 @@ int main()
                         	cout << "Входной файл не открыт" << endl;
                         	cout << "Анализатор для вещественного числа:" << endl;
 		        	b = isNumber(infile, s);
-                        	infile >> s;
                         	if(b && !infile.eof())
                         	{
                                 	Error(1);
