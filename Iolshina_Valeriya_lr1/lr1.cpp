@@ -76,7 +76,7 @@ bool isNumber(ifstream &infile, char s)
 					}
                                 }
 				else
-					return true;
+					return false;
 			}
 			else
 			{
