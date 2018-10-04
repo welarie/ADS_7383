@@ -158,6 +158,13 @@ bool res (ifstream &infile, bool b)
                 cout << endl << "Это НЕ вещественное число" << endl;
 }
 
+void greet(ifstream &infile)
+{
+        if(!infile)
+       		cout << "Входной файл не открыт" << endl;
+       	cout << "Анализатор для вещественного числа:" << endl;
+}
+
 int main()
 {
 	char s;
@@ -179,21 +186,16 @@ int main()
 				tempfile << ss;
 				tempfile.close();
 				ifstream infile ("ex.txt");
-                       		if(!infile)
-                        	cout << "Входной файл не открыт" << endl;
-                        	cout << "Анализатор для вещественного числа:" << endl;
-		        	b = isNumber(infile, s);
+                                greet(infile);
+                                b = isNumber(infile, s);
                         	res(infile, b);
 				}
 				break;
 			case 2:
 				{
 				ifstream infile ("ex.txt");
-        			if(!infile)
-                			cout << "Входной файл не открыт" << endl;
-        			cout << "Анализатор для вещественного числа:" << endl;
-        			b = isNumber(infile, s);
-        			infile >> s;
+                                greet(infile);
+                                b = isNumber(infile, s);
 				res(infile, b);
 				}
 				break;
