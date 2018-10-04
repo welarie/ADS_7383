@@ -144,8 +144,14 @@ void Error (short k)
 	};
 }
 
-bool res (ifstream &infile, bool b)
+bool res (bool b)
 {
+	char s;
+        ifstream infile ("ex.txt");
+        if(!infile)
+                cout << "Входной файл не открыт" << endl;
+        cout << "Анализатор для вещественного числа:" << endl;
+        b = isNumber(infile, s);
         if(b && !infile.eof())
         {
                 Error(1);
@@ -156,13 +162,6 @@ bool res (ifstream &infile, bool b)
                 cout << endl << "Это вещественное число" << endl;
         else
                 cout << endl << "Это НЕ вещественное число" << endl;
-}
-
-void greet(ifstream &infile)
-{
-        if(!infile)
-       		cout << "Входной файл не открыт" << endl;
-       	cout << "Анализатор для вещественного числа:" << endl;
 }
 
 int main()
@@ -185,18 +184,12 @@ int main()
 				cin >> ss;
 				tempfile << ss;
 				tempfile.close();
-				ifstream infile ("ex.txt");
-                                greet(infile);
-                                b = isNumber(infile, s);
-                        	res(infile, b);
+                        	res(b);
 				}
 				break;
 			case 2:
 				{
-				ifstream infile ("ex.txt");
-                                greet(infile);
-                                b = isNumber(infile, s);
-				res(infile, b);
+				res(b);
 				}
 				break;
 			case 3:
