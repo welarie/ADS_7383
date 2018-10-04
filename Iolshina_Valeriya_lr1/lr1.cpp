@@ -144,6 +144,20 @@ void Error (short k)
 	};
 }
 
+bool res (ifstream &infile, bool b)
+{
+        if(b && !infile.eof())
+        {
+                Error(1);
+                return false;
+        }
+        b = (b && infile.eof());
+        if(b)
+                cout << endl << "Это вещественное число" << endl;
+        else
+                cout << endl << "Это НЕ вещественное число" << endl;
+}
+
 int main()
 {
 	char s;
@@ -169,17 +183,7 @@ int main()
                         	cout << "Входной файл не открыт" << endl;
                         	cout << "Анализатор для вещественного числа:" << endl;
 		        	b = isNumber(infile, s);
-                        	if(b && !infile.eof())
-                        	{
-                                	Error(1);
-                                	return false;
-                        	}
-                        	b = (b && infile.eof());
-                 	        infile.close();
-				if(b)
-                			cout << endl << "Это вещественное число" << endl;
-        			else
-                			cout << endl << "Это НЕ вещественное число" << endl;
+                        	res(infile, b);
 				}
 				break;
 			case 2:
@@ -190,17 +194,8 @@ int main()
         			cout << "Анализатор для вещественного числа:" << endl;
         			b = isNumber(infile, s);
         			infile >> s;
-				if(b && !infile.eof())
-        			{
-                			Error(1);
-                			return false;
-        			}
-        			b = (b && infile.eof());
+				res(infile, b);
 				}
-				if(b)
-                			cout << endl << "Это вещественное число" << endl;
-        			else
-                			cout << endl << "Это НЕ вещественное число" << endl;
 				break;
 			case 3:
 				{
