@@ -74,7 +74,7 @@ int main()
 		{
         		case 1:
             		{
-				cout<<"Введите искомый элемент X\n";
+				cout << "Введите искомый элемент X\n";
         			cin >> x;
                 		cout << "Введите выражение: \n";
                 		cin.get();
@@ -85,7 +85,7 @@ int main()
             		}
             		case 2:
             		{
-                		cout<<"Введите искомый элемент X\n";
+                		cout << "Введите искомый элемент X\n";
         			cin >> x;
 				ifstream outfile;
                 		outfile.open("test.txt");
@@ -108,7 +108,7 @@ int main()
 			}
             		default:
             		{
-                		cout<<"Введите верное число\n";
+                		cout << "Введите верное число\n";
                 		break;
             		}
         	}
@@ -118,14 +118,10 @@ int main()
         		write_lisp (s);
         		cout<<endl;
         		cout << "Произведен поиск элемента: " << x << endl;
-        		if(s = del_atom(s,x))
-            		{
-	        		cout << "Элемент Х удален.\n";
+			s = del_atom(s,x);
+	        	cout << "Результат работы программы \n";
 				write_lisp(s);
 				cout << endl;
-	    		}
-            		else
-                		cout << s << "Элемент Х не найден.\n";
         		destroy(s);
         	}
 	}
