@@ -18,7 +18,7 @@ namespace stack
 	};
 
 base Stack::top(void)
-{// PreCondition: not null
+{
 	if (topOfStack == NULL)
 	{
 		cerr << "Error: top(null) \n";
@@ -29,7 +29,7 @@ base Stack::top(void)
 }
 
 void Stack::pop(void)
-{// PreCondition: not null
+{
 	if (topOfStack == NULL)
 	{
 		cerr << "Error: pop(null) \n";
@@ -45,7 +45,7 @@ void Stack::pop(void)
 }
 
 base Stack::pop2(void)
-{// PreCondition: not null
+{
 	if (topOfStack == NULL)
 	{
 		cerr << "Error: pop(null) \n";
@@ -71,7 +71,6 @@ void Stack::push(const base &x)
 	{
 		topOfStack->hd = new base;
 		*topOfStack->hd = x;
-// cout << "push -> " << x << endl; // Demo
 		topOfStack->tl = p;
 	}
 	else
