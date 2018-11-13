@@ -61,7 +61,7 @@ bool read_expr(stringstream &xstream, Stack *op)
     do xstream >> c; while (c == ' ');
 
     if (c == ')' && !(op->isNull())) //если очередной символ - закрывающая скобка и стек не пуст, вычисление
-    {  //если очередной символ НЕ закрывающая скобка - выход
+    {  
       res = true;
       calc(xstream, op); //вычисление
     }
