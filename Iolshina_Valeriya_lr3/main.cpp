@@ -6,9 +6,9 @@
 
 using namespace std;
 using namespace stack;
-void calc(stringstream &xstream, Stack *op, Stack *dig);
+void calc(stringstream &xstream, Stack *op);
 
-bool read_expr(stringstream &xstream, Stack *op, Stack *dig)
+bool read_expr(stringstream &xstream, Stack *op)
 {
   bool res = false;
   char c;
@@ -19,27 +19,27 @@ bool read_expr(stringstream &xstream, Stack *op, Stack *dig)
 
   if (isdigit(c))
   { // если является цифрой
-    dig->push(c - '0'); //записываем в стек digit
+    op->push(c - '0'); //записываем в стек digit
     res = true;
   }
   else if ((c == 'M') || (c == 'm'))
   { //является обозначением операции min или max
     if (c == 'M') //является max
-      op->push(1); //записываем в стек operation - 1
+      op->push(-1); //записываем в стек operation - 1
     else if (c == 'm') //является min
-      op->push(2); //записываем в стек operation - 2
+      op->push(-2); //записываем в стек operation - 2
 
     do xstream >> c; while (c == ' ');
 
     if (c != '(')
     {//если очередной символ НЕ окрывающая скобка - выход
-      cout << "\n! - Error\n";
+      cout << "\n! - Error1\n";
       exit(1);
     }
-    res = read_expr(xstream, op, dig); //рекурсивный вызов
+    res = read_expr(xstream, op); //рекурсивный вызов
     if (!res)
     {//если предыдущее выражение НЕ формула - выход
-      cout << "\n! - Error\n";
+      cout << "\n! - Error2\n";
       exit(1);
     }
 
@@ -47,40 +47,45 @@ bool read_expr(stringstream &xstream, Stack *op, Stack *dig)
 
     if (c != ',')
     {//если очередной символ НЕ запятая - выход
-      cout << "\n! - Error\n";
+      cout << "\n! - Error3\n";
       exit(1);
     }
-    res = read_expr(xstream, op, dig);//рекурсивный вызов
+
+    res = read_expr(xstream, op);//рекурсивный вызов
     if (!res)
     {//предыдущее выражение НЕ формула - выход
-      cout << "\n! - Error\n";
+      cout << "\n! - Error4\n";
       exit(1);
     }
 
     do xstream >> c; while (c == ' ');
 
+    if (c == ')' && !(op->isNull())) //если очередной символ - закрывающая скобка и стек не пуст, вычисление
+    {  //если очередной символ НЕ закрывающая скобка - выход
+      res = true;
+      calc(xstream, op); //вычисление
+    }
     if (c != ')')
     {  //если очередной символ НЕ закрывающая скобка - выход
-      cout << "! - Error\n";
+      cout << "! - Error5\n";
       exit(1);
     }
-    res = true;
-    calc(xstream, op, dig); //вычисление
   }
   else
   {
-    cout << "\n! - Error\n";
+    cout << "\n! - Error6\n";
     exit(1);
   }
 
 return res;
 }
 
-void calc(stringstream &xstream, Stack *op, Stack *dig)
+void calc(stringstream &xstream, Stack *op)
 {
+  base a = op->pop2();
+  base b = op->pop2();
   int fun = op->pop2();
-  base a = dig->pop2();
-  base b = dig->pop2();
+  cout << fun << endl;
   base res;
   if (a == b)
   {
@@ -89,18 +94,18 @@ void calc(stringstream &xstream, Stack *op, Stack *dig)
   }
   else
   {
-    if (fun == 1)//max
+    if (fun == -1)//max
     {
       (a > b) ? res = a : res = b;
       cout << "M( " << a << " , " << b << " ) = " << res << endl;
     }
-    else if (fun == 2)//min
+    else if (fun == -2)//min
     {
       (a < b) ? res = a : res = b;
       cout << "m( " << a << " , " << b << " ) = " << res << endl;
     }
   }
-  dig->push(res);
+  op->push(res);
   cout << endl;
 }
 
@@ -109,7 +114,7 @@ int main()
   stringstream xstream;
   bool b = 1;
   Stack operation; //стек для операций M(max) или m(min) из формулы
-  Stack digit; //стек для цифр из формулы
+  //Stack digit; //стек для цифр из формулы
   char x;
   char str[100];
   int c = 0;
@@ -127,7 +132,7 @@ int main()
           cin.get();
           cin.getline(str, 1000);
           xstream << str;
-          read_expr(xstream, &operation, &digit);
+          read_expr(xstream, &operation);
           break;
         }
       case 2:
@@ -143,7 +148,7 @@ int main()
           outfile.read(str, 1000);
           outfile.close();
           xstream << str;
-          read_expr (xstream, &operation, &digit);
+          read_expr (xstream, &operation);
           break;
         }
       case 3:
@@ -159,13 +164,12 @@ int main()
     }
     if(b)
     {
-      base result = digit.top();
+      base result = operation.top();
       cout << "Результат работы программы: \n";
       cout << result;
       cout << endl;
     }
 }
-digit.destroy();
 operation.destroy();
 return 0;
 }
