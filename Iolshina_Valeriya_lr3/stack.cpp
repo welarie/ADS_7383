@@ -17,7 +17,7 @@ namespace stack
 		}
 	};
 
-base Stack::top(void)
+base Stack::top()
 {
 	if (topOfStack == NULL)
 	{
@@ -28,7 +28,7 @@ base Stack::top(void)
 		return *topOfStack->hd;
 }
 
-void Stack::pop(void)
+void Stack::pop()
 {
 	if (topOfStack == NULL)
 	{
@@ -44,7 +44,7 @@ void Stack::pop(void)
 	}
 }
 
-base Stack::pop2(void)
+base Stack::pop2()
 {
 	if (topOfStack == NULL)
 	{
@@ -80,12 +80,12 @@ void Stack::push(const base &x)
 	}
 }
 
-bool Stack::isNull(void)
+bool Stack::isNull()
 {
 	return (topOfStack == NULL);
 }
 
-void Stack::destroy(void)
+void Stack::destroy()
 {
 	while (topOfStack != NULL)
 	{

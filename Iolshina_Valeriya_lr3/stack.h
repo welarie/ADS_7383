@@ -13,11 +13,11 @@ namespace stack
 		{
 			topOfStack = NULL;
 		};
-		base top(void);
-		void pop(void);
-		base pop2(void);
+		base top();
+		void pop();
+		base pop2();
 		void push(const base &x);
-		bool isNull(void);
-		void destroy(void);
+		bool isNull();
+		void destroy();
 	};
 }

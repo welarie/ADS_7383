@@ -132,8 +132,6 @@ int main()
         }
       case 2:
         {
-          cout << "Введите искомый элемент X\n";
-          cin >> x;
           ifstream outfile;
           outfile.open("test.txt");
           if (!outfile)
