@@ -7,7 +7,7 @@ struct Node
   int lt; //индекс левого узла
   int rt; //индекс правого узла
 };
-typedef Node binTree[100];
+typedef Node *binTree;
 bool isNull(binTree b, int i); //проверка на нулевой узел
 char RootBT(int i, binTree b); //взятие корня поддерева
 int Left(int i, binTree b); //взятие индекса левого узла
