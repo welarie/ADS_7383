@@ -32,8 +32,8 @@ int main()
 {
   bool b = 0;
   char c;
-  base arrayKLP[100];
-  base arrayLKP[100];
+  base *arrayKLP=(char*)calloc(20, sizeof(char));
+  base *arrayLKP=(char*)calloc(20, sizeof(char));
   int run = 0;
     cout << "Введите 1, если хотите ввести выражение с клавиатуры.\n"
             "Введите 2, если еспользовать выражение из файла test.txt.\n"
@@ -73,7 +73,6 @@ int main()
       case 2:
         {
           ifstream outfile;
-          string str;
           outfile.open("test.txt");
           if (!outfile)
           {
@@ -103,6 +102,7 @@ int main()
     if(b)
     {
       binTree b;
+      b = new Node;
       int i=0, res=0, n=0;
       res = createBT(arrayKLP, arrayLKP, i, b);
       cout << "Результат работы программы: \n";
