@@ -15,11 +15,11 @@ bool check_inp(base* arrayKLP, base* arrayLKP)
     for(int j=0; j<strlen(arrayLKP); j++)
     {
       if(arrayLKP[j] == arrayKLP[i])
-      k++;
+        k++;
     }
   }
   if(k == strlen(arrayKLP))
-    return true;
+      return true;
   else
   {
     cerr << "Перечисления содержат разные узлы" << endl;
@@ -30,13 +30,15 @@ bool check_inp(base* arrayKLP, base* arrayLKP)
 
 int main()
 {
-  bool b = 0;
+  bool k = 0;
+  int size = 20;
+  int size2 = 20;
   char c;
-  base arrayKLP[100];
-  base arrayLKP[100];
+  base *arrayKLP=(char*)calloc(size, sizeof(char));
+  base *arrayLKP=(char*)calloc(size2, sizeof(char));
   int run = 0;
     cout << "Введите 1, если хотите ввести выражение с клавиатуры.\n"
-            "Введите 2, если еспользовать выражение из файла test.txt.\n"
+            "Введите 2, если использовать выражение из файла test.txt.\n"
             "Введите 3, если хотите закончить работу." << endl;
     cin >> run;
     switch(run)
@@ -47,27 +49,37 @@ int main()
           cin.get();
           base c;
           do
-          c=getchar();
+            c=getchar();
           while(c == ' ');
           int j=0;
           while(!isspace(c))
           {
             arrayKLP[j]=c;
             j++;
+            if(j>=size)
+            {
+            size+=size;
+            arrayKLP = (char*)realloc(arrayKLP, size*sizeof(char));
+            }
             c=getchar();
           }
           do
-          c=getchar();
+            c=getchar();
           while(c == ' ');
           j=0;
           while(!isspace(c))
           {
             arrayLKP[j]=c;
             j++;
+            if(j>=size2)
+            {
+            size2+=size2;
+            arrayLKP = (char*)realloc(arrayLKP, size2*sizeof(char));
+            }
             c=getchar();
           }
           check_inp(arrayKLP, arrayLKP);
-          b=1;
+          k=1;
           break;
         }
       case 2:
@@ -78,37 +90,41 @@ int main()
           if (!outfile)
           {
             cout << "Входной файл не открыт!\n";
-            b = 0;
+            k = 0;
             break;
           }
           outfile >> arrayKLP;
           outfile >> arrayLKP;
           check_inp(arrayKLP, arrayLKP);
           outfile.close();
-          b=1;
+          k=1;
           break;
         }
       case 3:
         {
-          b=0;
+          k=0;
           break;
         }
       default:
         {
           cout << "Введите верное число\n";
-          b=0;
+          k=0;
           break;
         }
     }
-    if(b)
+    if(k)
     {
       binTree b;
+      b = new Node[strlen(arrayKLP)+1];
       int i=0, res=0, n=0;
-      res = createBT(arrayKLP, arrayLKP, i, b);
+      res = createBT(arrayKLP, arrayLKP, i, b, size);
       cout << "Результат работы программы: \n";
       printBT(b, i, n);
       cout << endl;
       LPK(b, i);
+      free(arrayKLP);
+      free(arrayLKP);
+      delete [] b;
       cout << endl << endl;
     }
 return 0;

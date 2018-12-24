@@ -60,7 +60,7 @@ int ConsBT(char x, int lst, int rst, binTree b, int i)
 	}
 }
 
-int createBT(base* arrayKLP, base* arrayLKP, int &i, binTree b)
+int createBT(base* arrayKLP, base* arrayLKP, int &i, binTree b, int size)
 {
   int l, r;
   char c,c1;
@@ -72,13 +72,13 @@ int createBT(base* arrayKLP, base* arrayLKP, int &i, binTree b)
     {
       if(arrayKLP[i]==arrayLKP[j])
       {
-        char* gap_left_str=(char*)calloc(20,sizeof(char));
+        char* gap_left_str=(char*)calloc(size,sizeof(char));
         strncpy(gap_left_str,arrayLKP,j);
-        char* gap_right_str=(char*)calloc(20,sizeof(char));
+        char* gap_right_str=(char*)calloc(size,sizeof(char));
         strncpy(gap_right_str,arrayLKP+j+1,strlen(arrayLKP)-j-1);
         i++;
-        l=createBT(arrayKLP, gap_left_str, i, b);
-        r=createBT(arrayKLP, gap_right_str, i, b);
+        l=createBT(arrayKLP, gap_left_str, i, b, size);
+        r=createBT(arrayKLP, gap_right_str, i, b, size);
         return ConsBT(c, l, r, b, count++);
       }
     }
