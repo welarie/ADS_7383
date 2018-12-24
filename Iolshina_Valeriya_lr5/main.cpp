@@ -12,26 +12,28 @@ int main()
   bool b = 0;
   int count=0;
   int k;
+  base el;
   int run = 0;
-  BST* tree = NULL;
   base arr[N];
+while(run!=3)
+{
     cout << "Введите 1, если хотите ввести выражение с клавиатуры.\n"
             "Введите 2, если хотите использовать выражение из файла test.txt.\n"
             "Введите 3, если хотите закончить работу." << endl;
     cin >> run;
+    BST* tree = NULL;
+    count=0;
     switch(run)
     {
       case 1:
         {
           cout << "Введите последовательность различных элементов: \n";
           cin.get();
-          base c;
-          do
-            c=getchar();
-          while(c == ' ');
-          while(!isspace(c))
+          char c=getchar();
+          while(c!='\n')
           {
-            cin>>arr[count];
+            cin>>el;
+	    arr[count] = el;
             count++;
             c=getchar();
           }
@@ -52,7 +54,6 @@ int main()
           }
           while(outfile >> arr[count])
           {
-            cout<<count<<" "<<arr[count]<<endl;
             count++;
           }
           outfile.close();
@@ -86,5 +87,6 @@ int main()
       tree = destroy(tree);
       cout << endl;
     }
+}
 return 0;
 }
