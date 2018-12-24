@@ -4,7 +4,7 @@
 #include <cstring>
 #include "bt.h"
 using namespace std;
-int count = 1;
+extern int count = 1;
 
 bool isNull(binTree b, int i)
 {

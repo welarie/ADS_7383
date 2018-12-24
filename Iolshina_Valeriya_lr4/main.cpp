@@ -6,6 +6,7 @@
 #include <cstring>
 
 using namespace std;
+extern int count;
 
 bool check_inp(base* arrayKLP, base* arrayLKP)
 {
@@ -31,16 +32,16 @@ bool check_inp(base* arrayKLP, base* arrayLKP)
 int main()
 {
   bool k = 0;
-  int size = 20;
-  int size2 = 20;
   char c;
-  base *arrayKLP=(char*)calloc(size, sizeof(char));
-  base *arrayLKP=(char*)calloc(size2, sizeof(char));
   int run = 0;
     cout << "Введите 1, если хотите ввести выражение с клавиатуры.\n"
             "Введите 2, если использовать выражение из файла test.txt.\n"
             "Введите 3, если хотите закончить работу." << endl;
     cin >> run;
+  int size = 20;
+  int size2 = 20;
+  base *arrayKLP=(char*)calloc(size, sizeof(char));
+  base *arrayLKP=(char*)calloc(size2, sizeof(char));
     switch(run)
     {
       case 1:
@@ -106,6 +107,7 @@ int main()
         }
       default:
         {
+	  run = 3;
           cout << "Введите верное число\n";
           k=0;
           break;
@@ -113,6 +115,7 @@ int main()
     }
     if(k)
     {
+      count = 1;
       binTree b;
       b = new Node[strlen(arrayKLP)+1];
       int i=0, res=0, n=0;
