@@ -10,25 +10,25 @@ TreeWidget::TreeWidget(QWidget *parent) : QWidget(parent)
 {
 view_ = new TreeView(this);
 view_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-// "Введите искомый элемент: "
+
 QLabel *label = new QLabel("Введите искомый элемент: ");
-// Окошко для вводимых значений
+
 lineEdit_ = new QLineEdit();
 lineEdit_->setValidator( new QIntValidator( -2147483648, 2147483647 ) );
-// Кнопки
+
 button_ins = new QPushButton( "Найти или добавить" );
 button_del = new QPushButton("Удалить");
 step = new QLabel("Начните строить дерево");
-// Горизонтальные виджеты (1)
+
 QHBoxLayout *layout = new QHBoxLayout;
 layout->addWidget(label);
 layout->addWidget(lineEdit_);
 layout->addWidget(button_ins);
 layout->addWidget(button_del);
-// Горизонтальные виджеты (2)
+
 QHBoxLayout *infLayout=new QHBoxLayout;
 infLayout->addWidget(step);
-// Выравниваем виджеты
+
 QVBoxLayout *mainLayout = new QVBoxLayout;
 mainLayout->addLayout(layout);
 mainLayout->addLayout(infLayout);
@@ -40,10 +40,10 @@ connect(button_del, &QPushButton::clicked, this, &TreeWidget::del );
 
 void TreeWidget::del()
 {
-//Считываем число из строчки
+
 int k = lineEdit_->text().toInt();
 view_->Push_key(k);
-//Если дерево пусто - игнорируем запрос на удаление
+
 if (view_->tree == NULL)
 {
     step->setText(QString::asprintf("Дерево пусто"));
